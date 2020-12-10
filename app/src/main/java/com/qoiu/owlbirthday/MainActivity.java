@@ -1,18 +1,19 @@
 package com.qoiu.owlbirthday;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.FacebookSdk;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.applinks.AppLinkData;
-
-import java.util.concurrent.Executor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,11 +26,23 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = this.getSharedPreferences("deeplink", MODE_PRIVATE);
         if (!sharedPreferences.getString("link", "").equals("")) {
-            Toast.makeText(this, "Activity 3", Toast.LENGTH_LONG).show();
             //start activity #3
         } else {
             getDeepLink();
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = getString(R.string.msg_subscribed);
+                        if (!task.isSuccessful()) {
+                            msg = getString(R.string.msg_subscribe_failed);
+                        }
+                        Log.d("TAG", msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void getDeepLink() {
@@ -59,16 +72,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-    }
-
-
-    public void checkPreference() {
-        if (!sharedPreferences.getString("link", "").equals("")) {
-            Toast.makeText(this, "Activity 3", Toast.LENGTH_LONG).show();
-            //start activity #3
-        } else {
-            Toast.makeText(this, "Activity 2", Toast.LENGTH_LONG).show();
-            //start activity #2
-        }
     }
 }

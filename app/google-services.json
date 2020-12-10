@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "232587270478",
+    "project_id": "owlbirthday-3d406",
+    "storage_bucket": "owlbirthday-3d406.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232587270478:android:19116136450501f5c7e61f",
+        "android_client_info": {
+          "package_name": "com.qoiu.owlbirthday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232587270478-oopmn8a49ij8tqnake707g91n0fpqgin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qoiu.owlbirthday",
+            "certificate_hash": "292dd8dcf1f389e164228fa37b86000306a9aebf"
+          }
+        },
+        {
+          "client_id": "232587270478-omda723ocq76q7mglo87lkqptec8svmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKY5EMba9IW1VuWTIx9bCgd4XOO1xQHYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232587270478-omda723ocq76q7mglo87lkqptec8svmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
