@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.FacebookSdk;
 
+import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
+    private String TAG="MainActivity";
 
     private SharedPreferences sharedPreferences;
 
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = this.getSharedPreferences("deeplink", MODE_PRIVATE);
         if (!sharedPreferences.getString("link", "").equals("")) {
             //start activity #3
+            Log.d(TAG,"activity 3 from SharedPreference");
+            Intent intent = new Intent(MainActivity.this,WebActivity.class);
+            startActivity(intent);
         } else {
             getDeepLink();
         }
@@ -40,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                             msg = getString(R.string.msg_subscribe_failed);
                         }
                         Log.d("TAG", msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -61,12 +66,18 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     //start activity #3
+                                    Log.d(TAG,"activity 3 from deeplink");
+                                    Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                                    startActivity(intent);
                                 }});
                         }else{
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //start activity #2
+                                    Log.d(TAG,"activity 2 no deeplink");
+                                    Intent intent = new Intent(MainActivity.this,GameActivity.class);
+                                    startActivity(intent);
                                 }});
                         }
                     }
